@@ -1,4 +1,4 @@
-AmbientGPT
+## AmbientGPT
 
 ![Alt text](public/images/ambientGPT.png)
 
