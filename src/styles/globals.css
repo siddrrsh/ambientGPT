@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.dropdown-option {
+    color: #333333; /* Text color */
+    font-size: 14px; /* Font size */
+    font-weight: normal; /* Font weight */
+    /* Add any other custom styling as needed */
+  }
+  
