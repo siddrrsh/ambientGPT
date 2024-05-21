@@ -1,13 +1,17 @@
 ## AmbientGPT
 
-<img src="public/images/ambientGPT.png" alt="ambience" width="512"/>
+<img src="public/images/ambientGPT.png" alt="AmbientGPT Logo" width="256"/>
 
-Run GPT4o and local foundation models with full ambient knowledge of your screen. Foundation models have long been trapped in the browser. With ambientGPT, your screen context is directly inferred as part of the query ... this way you never need to explicitly upload context again!
+**Run GPT-4 and local foundation models with full ambient knowledge of your screen.** Foundation models have long been confined to the browser. With AmbientGPT, your screen context is directly inferred as part of the query, ensuring you never need to explicitly upload context again!
 
-Note: to run local models, you will need an arm64 (M1, M2, M3, ...) Macbook. You also need a compatible OpenAI API key to use gpt4o. 
+**Note:** To run local models, you will need an ARM64 (M1, M2, M3, ...) MacBook. Additionally, a compatible OpenAI API key is required to use GPT-4o.
 
-Usage:
-` pip3 install requirements.txt `
-` yarn && yarn dev `
+### Usage
 
-MacOS app coming soon (pending Apple certification)
+Install the necessary packages:
+```bash
+pip3 install -r requirements.txt
+yarn && yarn dev
+```
+
+**MacOS app coming soon** (pending Apple certification)
