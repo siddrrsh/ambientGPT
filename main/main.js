@@ -13,8 +13,14 @@ const { desktopCapturer } = require('electron');
 const screenshot = require('screenshot-desktop');
 
 async function captureScreen() {
-  const sources = await desktopCapturer.getSources({ types: ['screen'] });
-  return sources[0].thumbnail.toDataURL(); // returns image as dataURL
+  try {
+    const imgPath = path.join(os.tmpdir(), 'screenshot.png'); // Save in the OS's temporary directory
+    await screenshot({filename: imgPath});
+    return imgPath; // Return the file path
+  } catch (error) {
+    console.error("Error capturing the screen: ", error);
+    return null;
+  }
 }
 
 const appServe = app.isPackaged
@@ -76,9 +82,9 @@ app.on("window-all-closed", () => {
 });
 
 ipcMain.on("sendChat", async (event, args) => {
-    const screenImage = await captureScreen();
+    const imagePath = await captureScreen();
     const { spawn } = require("node:child_process");
-    const childPython = spawn("python3", ["test.py", args, screenImage]); // send image context as an additional argument
+    const childPython = spawn("python3", ["test.py", args, imagePath]); // send image context as an additional argument
 
     childPython.stdout.on("data", (data) => {
         event.reply("receiveTokens", String(data));

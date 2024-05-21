@@ -11,7 +11,7 @@ from io import BytesIO
 import time
 import re
 import requests
-
+import tempfile
 from openai import OpenAI
 
 #response = generate(model, tokenizer, temp=0.7, max_tokens=500, prompt="write me a poem about the ocean", verbose=True)
@@ -172,13 +172,15 @@ def process_data(model, text, image_data_url):
     if local:
         # Generate description of the image
         if "phi" in model:
+            '''
             header, encoded = image_data_url.split(",", 1)
             image_data = base64.b64decode(encoded)
             image = Image.open(BytesIO(image_data))
-            image.save("temp_image.png")  # Save the image temporarily   
+            image.save("temp_image.png")  # Save the image temporarily
+            '''
             combined_prompt = f"You are a helpful desktop assistant. We've also provided some context from the user's screen. Now answer the user's question: {text}"
             t_o = time.time()
-            output = multimodal_generate("temp_image.png", combined_prompt)
+            output = multimodal_generate(tempfile.gettempdir() + '/screenshot.png', combined_prompt)
             lst = output.split("<|assistant|>")
             lst2 = lst[1].split("==")
             output = lst2[0]
@@ -192,12 +194,14 @@ def process_data(model, text, image_data_url):
             response = master_generate(model, combined_prompt)
     
     else:
+        '''
         header, encoded = image_data_url.split(",", 1)
         image_data = base64.b64decode(encoded)
         image = Image.open(BytesIO(image_data))
         image.save("temp_image.png")  # Save the image temporarily
+        '''
         combined_prompt = f"You are a helpful desktop assistant. We've also provided some context from the user's screen. Now answer the user's question: {text}"
-        response = gpt4o_response(combined_prompt, "temp_image.png")
+        response = gpt4o_response(combined_prompt, tempfile.gettempdir() + '/screenshot.png')
 
     # Clean up temporary image file
     os.remove("temp_image.png")

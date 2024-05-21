@@ -14,7 +14,7 @@ export default function MessageMode() {
   const [endReached, setEndReached] = useState<boolean>(false);
   const [messages, setMessages] = useState<any>([]);
   const [latestImage, setLatestImage] = useState<string>(""); // Store the latest image value
-  const [selectedOption, setSelectedOption] = useState<string>("Phi"); // Selected option in dropdown
+  const [selectedOption, setSelectedOption] = useState<string>("OpenAI"); // Selected option in dropdown
   const inputRef = useRef<HTMLInputElement>(null);
   const messagesEndRef = useRef<any>(null);
 
@@ -58,9 +58,9 @@ export default function MessageMode() {
 
     // Dropdown options
     const options = [
+      { value: "OpenAI", label: "OpenAI" },
       { value: "Phi", label: "Phi" },
       { value: "Gemma", label: "Gemma" },
-      { value: "OpenAI", label: "OpenAI" },
     ];
   
     const handleOptionChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
