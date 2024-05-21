@@ -1,6 +1,6 @@
 ## AmbientGPT
 
-![Alt text](public/images/ambientGPT.png)
+<img src="public/images/ambientGPT.png" alt="ambience" width="512"/>
 
 Run GPT4o and local foundation models with full ambient knowledge of your screen. Foundation models have long been trapped in the browser. With ambientGPT, your screen context is directly inferred as part of the query ... this way you never need to explicitly upload context again!
 
