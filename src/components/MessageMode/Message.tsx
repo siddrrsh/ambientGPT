@@ -45,65 +45,54 @@ function ModelMessage({ message }: Props) {
           </p>
         </div>
         <Markdown
-          options={{
-            overrides: {
-              b: {
-                component: ({ children, ...props }) => <i>{children}</i>,
-              },
-              i: {
-                component: ({ children, ...props }) => <i>{children}</i>,
-              },
-              code: {
-                component: ({ children, ...props }) => (
-                  <>
-                    <pre className="language-python">
-                      <code
-                        {...props}
-                        className="text-[10px] break-all text-[#333333]"
-                      >
-                        {children}
-                      </code>
-                    </pre>
-                  </>
-                ),
-              },
-              ul: {
-                component: ({ children, ...props }) => (
-                  <ul
-                    {...props}
-                    className="text-xs ml-5 list-disc mt-1 text-[#333333]"
-                  >
-                    {children}
-                  </ul>
-                ),
-              },
-              li: {
-                component: ({ children, ...props }) => (
-                  <li {...props} className="text-sm mt-0.5 text-[#333333]">
-                    {children}
-                  </li>
-                ),
-              },
-              p: {
-                component: ({ children, ...props }) => (
-                  <p {...props} className="text-xs mt-2.5 text-[#333333]">
-                    {children}
-                  </p>
-                ),
-              },
-              h1: {
-                component: ({ children, ...props }) => (
-                  <h1
-                    {...props}
-                    className="text-sm mt-3 font-bold text-[#333333]"
-                  >
-                    {children}
-                  </h1>
-                ),
-              },
-            },
-          }}
-        >
+  options={{
+    overrides: {
+      b: {
+        component: ({ children, ...props }) => <strong {...props}>{children}</strong>,
+      },
+      i: {
+        component: ({ children, ...props }) => <em {...props}>{children}</em>,
+      },
+      code: {
+        component: ({ children, ...props }) => (
+          <pre {...props} className="language-python">
+            <code className="text-[10px] break-all text-[#333333]">
+              {children}
+            </code>
+          </pre>
+        ),
+      },
+      ul: {
+        component: ({ children, ...props }) => (
+          <ul {...props} className="text-xs ml-5 list-disc mt-1 text-[#333333]">
+            {children}
+          </ul>
+        ),
+      },
+      li: {
+        component: ({ children, ...props }) => (
+          <li {...props} className="text-sm mt-0.5 text-[#333333]">
+            {children}
+          </li>
+        ),
+      },
+      p: {
+        component: ({ children, ...props }) => (
+          <p {...props} className="text-xs mt-2.5 text-[#333333]">
+            {children}
+          </p>
+        ),
+      },
+      h1: {
+        component: ({ children, ...props }) => (
+          <h1 {...props} className="text-sm mt-3 font-bold text-[#333333]">
+            {children}
+          </h1>
+        ),
+      },
+    },
+  }}
+>
           {updatedMessage}
         </Markdown>
         <div className="mt-2 flex flex-row justify-between items-center w-full">
