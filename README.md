@@ -1,8 +1,9 @@
 ## AmbientGPT
 
-<img src="public/images/ambientGPT.png" alt="AmbientGPT Logo" width="256"/>
+<img src="public/images/ambientGPT.png" alt="AmbientGPT Logo" width="128"/>
 
 **Run GPT-4 and local foundation models with full ambient knowledge of your screen.** Foundation models have long been confined to the browser. With AmbientGPT, your screen context is directly inferred as part of the query, ensuring you never need to explicitly upload context again!
+
 
 <img src="public/images/caesar.png" alt="AmbientGPT Demo"/>
 
