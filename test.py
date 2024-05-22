@@ -16,6 +16,9 @@ from openai import OpenAI
 
 #response = generate(model, tokenizer, temp=0.7, max_tokens=500, prompt="write me a poem about the ocean", verbose=True)
 
+'''
+INSERT YOUR OPENAI API KEY IN THE GPT4O FUNCTION!!
+'''
 
 
 stop_words = ["<|im_start|>", "<|im_end|>", "<s>", "</s>"]
@@ -115,7 +118,7 @@ def gpt4o_response(text, image_path):
 
     # Getting the base64 string
     base64_image = encode_image(image_path)
-    api_key = "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"
+    api_key = "INSERT YOUR API KEY"
     headers = {
         "Content-Type": "application/json",
         "Authorization": f"Bearer {api_key}"
