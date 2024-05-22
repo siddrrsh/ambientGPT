@@ -119,6 +119,7 @@ def gpt4o_response(text, image_path):
     # Getting the base64 string
     base64_image = encode_image(image_path)
     api_key = "INSERT YOUR API KEY"
+    # If you're trying to be cheeky and use the one from past commits in this repo, it's been deactivated :(
     headers = {
         "Content-Type": "application/json",
         "Authorization": f"Bearer {api_key}"
