@@ -19,7 +19,7 @@
 Install the necessary packages:
 ```bash
 pip3 install -r requirements.txt
-yarn && yarn dev
+npm install && npm run dev
 ```
 
 **MacOS app coming soon** (pending Apple certification)

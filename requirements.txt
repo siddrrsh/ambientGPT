@@ -1,15 +1,6 @@
-mlx-core
+mlx
 mlx-lm
 Pillow
-base64
-io
-time
-re
 requests
-tempfile
 openai
-subprocess
 shlex
-os
-sys
-
