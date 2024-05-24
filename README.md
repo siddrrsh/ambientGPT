@@ -15,6 +15,7 @@
 
 ### Usage
 
+**You must add your OpenAI API key to test.py to run their models**
 
 Install the necessary packages:
 ```bash
