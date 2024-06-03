@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import Message from "./Message";
-import Image from 'next/image';
-
+import Image from "next/image";
 
 interface MessageProps {
   type: string;
@@ -30,10 +29,7 @@ export default function MessageMode() {
 
   useEffect(() => {
     if (endReached) {
-      setMessages((prevMessages: any) => [
-        ...prevMessages,
-        { type: "ai", message: currentMessage },
-      ]);
+      setMessages((prevMessages: any) => [...prevMessages, { type: "ai", message: currentMessage }]);
       setCurrentMessage("");
       setEndReached(false);
     }
@@ -56,47 +52,44 @@ export default function MessageMode() {
     });
   }, []);
 
-    // Dropdown options
-    const options = [
-      { value: "OpenAI", label: "OpenAI" },
-      { value: "Phi", label: "Phi" },
-      { value: "Gemma", label: "Gemma" },
-    ];
-  
-    const handleOptionChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-      setSelectedOption(event.target.value);
-    };
+  // Dropdown options
+  const options = [
+    { value: "OpenAI", label: "OpenAI" },
+    { value: "Phi", label: "Phi" },
+    { value: "Gemma", label: "Gemma" },
+    { value: "Ollama", label: "Ollama" },
+  ];
+
+  const handleOptionChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setSelectedOption(event.target.value);
+  };
 
   return (
-    <div
-      className="h-[100vh]"
-      style={{ background: "radial-gradient(#ffffff, transparent)" }}
-    >
-            {/* Dropdown */}
-            <div className="flex justify-center items-center">
+    <div className="h-[100vh] bg-white">
       {/* Dropdown */}
-      <select
-        value={selectedOption}
-        onChange={handleOptionChange}
-        className="rounded-md border border-gray-300 pr-8 bg-white text-sm leading-5 font-medium focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 px-3 py-2"
-      >
-        {options.map((option) => (
-          <option key={option.value} value={option.value}>
-            {option.label}
-          </option>
-        ))}
-      </select>
-      {/* Render the selected image */}
-      <div className="ml-2">
-        <Image
-          src={`/images/${selectedOption}.png`} // Use the selected value to change the image source
-          height={24}
-          width={24}
-          alt="Selected Image"
-        />
+      <div className="flex justify-center items-center">
+        {/* Dropdown */}
+        <select
+          value={selectedOption}
+          onChange={handleOptionChange}
+          className="rounded-md border border-gray-300 pr-8 bg-white text-sm leading-5 font-medium focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 px-3 py-2"
+        >
+          {options.map((option) => (
+            <option key={option.value} value={option.value}>
+              {option.label}
+            </option>
+          ))}
+        </select>
+        {/* Render the selected image */}
+        <div className="ml-2">
+          <Image
+            src={`/images/${selectedOption}.png`} // Use the selected value to change the image source
+            height={24}
+            width={24}
+            alt="Selected Image"
+          />
+        </div>
       </div>
-    </div>
-
 
       <div
         style={{
@@ -114,15 +107,9 @@ export default function MessageMode() {
           }}
         >
           {messages.map((value: any, index: number) => {
-            return (
-              <Message key={index} type={value.type} message={value.message} />
-            );
+            return <Message key={index} type={value.type} message={value.message} />;
           })}
-          {currentMessage.length ? (
-            <Message type="ai" message={selectedOption+"$!$"+currentMessage} />
-          ) : (
-            <></>
-          )}
+          {currentMessage.length ? <Message type="ai" message={selectedOption + "$!$" + currentMessage} /> : <></>}
           <div ref={messagesEndRef} />
         </div>
         <br></br>
@@ -131,14 +118,11 @@ export default function MessageMode() {
           onSubmit={(e) => {
             e.preventDefault();
             // Append the latest image value to the beginning of the text
-            const messageToSend = selectedOption + '$!$' + text;
+            const messageToSend = selectedOption + "$!$" + text;
             console.log(messageToSend);
             //@ts-ignore
             window.electronAPI.send("sendChat", messageToSend);
-            setMessages((prevMessages: any) => [
-              ...prevMessages,
-              { type: "user", message: text },
-            ]);
+            setMessages((prevMessages: any) => [...prevMessages, { type: "user", message: text }]);
             setText("");
           }}
           className="fixed bottom-0 left-0 w-full p-2 flex flex-row space-x-3"
