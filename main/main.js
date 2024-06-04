@@ -1,21 +1,14 @@
-const {
-  app,
-  BrowserWindow,
-  process,
-  globalShortcut,
-  ipcMain,
-  screen,
-} = require("electron");
+const { app, BrowserWindow, process, globalShortcut, ipcMain, screen } = require("electron");
 const serve = require("electron-serve");
 var os = require("os");
 const path = require("path");
-const { desktopCapturer } = require('electron');
-const screenshot = require('screenshot-desktop');
+const { desktopCapturer } = require("electron");
+const screenshot = require("screenshot-desktop");
 
 async function captureScreen() {
   try {
-    const imgPath = path.join(os.tmpdir(), 'screenshot.png'); // Save in the OS's temporary directory
-    await screenshot({filename: imgPath});
+    const imgPath = path.join(os.tmpdir(), "screenshot.png"); // Save in the OS's temporary directory
+    await screenshot({ filename: imgPath });
     return imgPath; // Return the file path
   } catch (error) {
     console.error("Error capturing the screen: ", error);
@@ -82,18 +75,25 @@ app.on("window-all-closed", () => {
 });
 
 ipcMain.on("sendChat", async (event, args) => {
-    const imagePath = await captureScreen();
-    const { spawn } = require("node:child_process");
-    const childPython = spawn("python3", ["test.py", args, imagePath]); // send image context as an additional argument
+  console.log("Received message: ", args);
+  const imagePath = await captureScreen();
+  const { spawn } = require("node:child_process");
+  const childPython = spawn("python3", ["test.py", args, imagePath]); // send image context as an additional argument
 
-    childPython.stdout.on("data", (data) => {
-        event.reply("receiveTokens", String(data));
-    });
+  childPython.stdout.on("data", (data) => {
+    console.log("Received data from python: ", data.toString());
+    event.reply("receiveTokens", String(data));
+  });
 
-    childPython.stdout.on("end", (data) => {
-        event.reply("endTokens");
-        childPython.kill();
-    });
+  childPython.stdout.on("end", (data) => {
+    console.log("Finished executing python script");
+    event.reply("endTokens");
+    childPython.kill();
+  });
+
+  childPython.stderr.on("data", (data) => {
+    console.error("Error from python: ", data.toString());
+  });
 });
 ipcMain.on("getCpuUsage", (event, args) => {
   const result = {
@@ -105,7 +105,6 @@ ipcMain.on("getCpuUsage", (event, args) => {
   };
   event.reply("receiveCpuUsage", JSON.stringify(result));
 });
-
 
 /*
 Idea:

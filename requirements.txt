@@ -3,4 +3,4 @@ mlx-lm
 Pillow
 requests
 openai
-shlex
+ushlex
